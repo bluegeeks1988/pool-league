@@ -8,19 +8,36 @@
     Fixtures - Week of {{ $start->format('d M') }} - {{ $end->format('d M Y') }}
 </h1>
 
-<!-- Week Navigation -->
-<div class="flex justify-center gap-4 mb-8">
-    <a href="{{ url('/calendar/week?start=' . $start->copy()->subWeek()->toDateString()) }}" class="bg-gray-300 hover:bg-gray-400 rounded px-4 py-2">
-        ← Previous Week
-    </a>
+<div class="flex flex-wrap justify-center items-center gap-4 mb-6">
 
-    <a href="{{ url('/calendar/week') }}" class="bg-blue-500 text-white hover:bg-blue-600 rounded px-4 py-2">
-        This Week
-    </a>
+    <!-- Team Filter -->
+    <form method="GET" action="{{ url('/calendar/week') }}" class="flex gap-2">
+        <input type="hidden" name="start" value="{{ $start->toDateString() }}">
+        <select name="team_id" onchange="this.form.submit()" class="border rounded p-2">
+            <option value="">All Teams</option>
+            @foreach ($teams as $team)
+                <option value="{{ $team->id }}" {{ $teamId == $team->id ? 'selected' : '' }}>
+                    {{ $team->name }}
+                </option>
+            @endforeach
+        </select>
+    </form>
 
-    <a href="{{ url('/calendar/week?start=' . $start->copy()->addWeek()->toDateString()) }}" class="bg-gray-300 hover:bg-gray-400 rounded px-4 py-2">
-        Next Week →
-    </a>
+    <!-- Navigation Buttons -->
+    <div class="flex gap-2">
+        <a href="{{ url('/calendar/week?start=' . $start->copy()->subWeek()->toDateString()) }}" class="bg-gray-300 hover:bg-gray-400 rounded px-4 py-2">
+            ← Previous Week
+        </a>
+
+        <a href="{{ url('/calendar/week') }}" class="bg-blue-500 text-white hover:bg-blue-600 rounded px-4 py-2">
+            This Week
+        </a>
+
+        <a href="{{ url('/calendar/week?start=' . $start->copy()->addWeek()->toDateString()) }}" class="bg-gray-300 hover:bg-gray-400 rounded px-4 py-2">
+            Next Week →
+        </a>
+    </div>
+
 </div>
 
 <!-- Week Grid -->
