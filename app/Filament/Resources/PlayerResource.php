@@ -42,6 +42,16 @@ class PlayerResource extends Resource
                 ->directory('player-profiles')
                 ->image()
                 ->nullable(),
+
+            Select::make('role')
+                ->label('Role')
+                ->options([
+                    'player' => 'Player',
+                    'captain' => 'Captain',
+                    'vice-captain' => 'Vice Captain',
+                ])
+                ->default('player')
+                ->required(),
         ]);
 }
 

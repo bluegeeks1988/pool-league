@@ -20,6 +20,16 @@
                 <img src="{{ asset('storage/' . $player->profile_image) }}" alt="{{ $player->name }}" class="h-16 w-16 mx-auto rounded-full mb-2 object-cover">
             @endif
             <div class="font-bold">{{ $player->name }}</div>
+
+            @if ($player->role === 'captain')
+                <div class="text-xs bg-blue-500 text-white px-2 py-0.5 rounded-full mt-1 inline-block">
+                    Captain
+                </div>
+            @elseif ($player->role === 'vice-captain')
+                <div class="text-xs bg-yellow-500 text-white px-2 py-0.5 rounded-full mt-1 inline-block">
+                    Vice Captain
+                </div>
+            @endif
         </div>
     @endforeach
 </div>
