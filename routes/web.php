@@ -28,3 +28,4 @@ Route::get('/teams/{team}', [TeamController::class, 'show']);
 Route::get('/players', [PlayerController::class, 'index']);
 
 Route::get('/calendar', [CalendarController::class, 'index']);
+Route::get('/calendar/week', [WeekCalendarController::class, 'index']);
